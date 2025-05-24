@@ -43,18 +43,3 @@ int ByteInputStream::read(uint16_t& val) {
 int ByteInputStream::read(uint32_t& val) {
     return readBytes((uint8_t*)&val, 4);
 }
-
-ByteInputStream& ByteInputStream::operator>>(uint8_t& val) {
-    read(val);
-    return *this;
-}
-
-ByteInputStream& ByteInputStream::operator>>(uint16_t& val) {
-    read(val);    
-    return *this;
-}
-
-ByteInputStream& ByteInputStream::operator>>(uint32_t& val) {
-    read(val);    
-    return *this;
-}

@@ -27,11 +27,6 @@ class ByteOutputStream : public Stream {
 
         size_t write(uint8_t w);
         size_t writeBytes(const uint8_t* buffer, size_t len);
-
-        ByteOutputStream& operator<<(uint8_t val);
-        ByteOutputStream& operator<<(uint16_t val);
-        ByteOutputStream& operator<<(uint32_t val);
-
 };
 
 #endif // __BYTEOUTPUTSTREAM_H__

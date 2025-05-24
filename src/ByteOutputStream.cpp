@@ -54,18 +54,3 @@ int ByteOutputStream::write(uint32_t val) {
     return writeBytes(buffer, 4);
 }
 
-ByteOutputStream& ByteOutputStream::operator<<(uint8_t val) {
-    write(val);
-    return *this;
-}
-
-ByteOutputStream& ByteOutputStream::operator<<(uint16_t val) {
-    write(val);    
-    return *this;
-}
-
-ByteOutputStream& ByteOutputStream::operator<<(uint32_t val) {
-    write(val);    
-    return *this;
-}
-

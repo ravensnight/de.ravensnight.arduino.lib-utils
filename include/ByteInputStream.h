@@ -25,11 +25,6 @@ class ByteInputStream : public Stream {
         int read();
         
         size_t write(uint8_t w);
-
-        ByteInputStream& operator>>(uint8_t& val);
-        ByteInputStream& operator>>(uint16_t& val);
-        ByteInputStream& operator>>(uint32_t& val);
-
 };
 
 #endif //  __BYTEINPUTSTREAM_H__
