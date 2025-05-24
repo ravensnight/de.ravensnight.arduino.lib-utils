@@ -1,0 +1,23 @@
+{
+  "name": "ravensnight lib-utils",
+  "version": "1.0.0",
+  "description": "Defines a some utilities being used in other libs",
+  "keywords": "utils",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/ravensnight/de.ravensnight.arduino.lib-utils"
+  }, 
+  "authors":
+  [
+    {
+      "name": "ravensnight",
+      "email": "ravensnight@hoheisels-welt.de",
+      "url": ""
+    }
+  ],
+  "license": "MIT",
+  "dependencies": [],
+  "frameworks": "arduino",
+  "platforms": "atmelavr,espressif32"
+}
+
