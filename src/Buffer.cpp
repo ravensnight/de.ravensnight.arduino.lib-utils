@@ -54,32 +54,22 @@ Buffer::Buffer() {
     _pos = 0;
 }
 
+Buffer::Buffer(uint8_t* buffer, size_t len) {
+    _size = len;
+    _buffer = buffer;
+    _mine = false;
+    _pos = 0;
+}
+
 Buffer::Buffer(size_t len) {
-    create(len);
+    this->_buffer = (uint8_t*)malloc(len);
+    this->_size = len;
+    this->_mine = true;
+    this->_pos = 0;
 }
 
 Buffer::~Buffer() {
     destroy();
-}
-
-Buffer& Buffer::wrap(uint8_t* buffer, size_t len) {
-    destroy();
-
-    this->_buffer = buffer;
-    this->_size = len;
-    this->_mine = false;
-
-    return (*this);
-}
-
-Buffer& Buffer::create(size_t len) {
-    destroy();
-
-    this->_buffer = (uint8_t*)malloc(len);
-    this->_size = len;
-    this->_mine = true;
-
-    return (*this);
 }
 
 size_t Buffer::available() {

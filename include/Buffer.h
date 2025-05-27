@@ -22,10 +22,8 @@ class Buffer {
 
         Buffer();
         Buffer(size_t len);
+        Buffer(uint8_t* buffer, size_t len);
         ~Buffer();
-
-        Buffer& wrap(uint8_t* buffer, size_t len);
-        Buffer& create(size_t len);
 
         void destroy();
         

@@ -1,7 +1,7 @@
 #include <BufferOutputStream.h>
 
 BufferOutputStream::BufferOutputStream(uint8_t* buffer, size_t len) {
-    _buffer.wrap(buffer, len);
+    _buffer = Buffer(buffer, len);
 }
 
 int BufferOutputStream::available() {
