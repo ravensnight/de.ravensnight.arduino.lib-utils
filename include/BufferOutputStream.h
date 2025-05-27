@@ -1,20 +1,19 @@
-#ifndef __BYTEOUTPUTSTREAM_H__
-#define __BYTEOUTPUTSTREAM_H__
+#ifndef __BufferOutputStream_H__
+#define __BufferOutputStream_H__
 
 #include <Arduino.h>
 #include <Stream.h>
+#include <Buffer.h>
 
-class ByteOutputStream : public Stream {
+class BufferOutputStream : public Stream {
 
     private:
 
-        uint8_t* _buffer;
-        size_t _pos = 0;
-        size_t _size = 0;
+        Buffer _buffer;
 
     public:
 
-        ByteOutputStream(uint8_t *buffer, size_t size);
+        BufferOutputStream(uint8_t* buffer, size_t len);
 
         int write(uint16_t val);
         int write(uint32_t val);
@@ -29,4 +28,4 @@ class ByteOutputStream : public Stream {
         size_t writeBytes(const uint8_t* buffer, size_t len);
 };
 
-#endif // __BYTEOUTPUTSTREAM_H__
+#endif // __BufferOutputStream_H__

@@ -19,25 +19,28 @@ size_t Masquerade::getDecodedSize(size_t sourceLen) {
     return sourceLen;
 }
 
-size_t Masquerade::encode(uint8_t* outBytes, size_t outSize, const uint8_t* inBytes, size_t inSize) {
-    if (inSize > outSize) {
-        Logger::error("Masquerade::convert - Input size %d greater than output size %d. Skip conversion.", inSize, outSize);
-        return -1;
+size_t Masquerade::encode(Stream& out, Stream& in) {
+    size_t res = 0;
+    uint8_t val = 0;
+
+    while ((in.available() > 0) && (out.availableForWrite() > 0)) {
+        in >> val;
+        out << val;
+        res++;
     }
 
-    for (size_t i = 0; i < inSize; i++) {
-        outBytes[i] = inBytes[i] & _mask;
-    };
-
-    return inSize;
+    return res;
 }
 
-size_t Masquerade::decode(uint8_t* outBytes, size_t outSize, const uint8_t* inBytes, size_t inSize) {
-    if (inSize > outSize) {
-        Logger::error("Masquerade::convert - Input size %d greater than output size %d. Skip conversion.", inSize, outSize);
-        return -1;
+size_t Masquerade::decode(Stream& out, Stream& in) {
+    size_t res = 0;
+    uint8_t val = 0;
+
+    while ((in.available() > 0) && (out.availableForWrite() > 0)) {
+        in >> val;
+        out << val;
+        res++;
     }
 
-    memcpy(outBytes, inBytes, inSize);
-    return inSize;
+    return res;
 }

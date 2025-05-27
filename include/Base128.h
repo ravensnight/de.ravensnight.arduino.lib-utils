@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <Converter.h>
+#include <Buffer.h>
 
 class Base128 : public Converter {
 
@@ -13,12 +14,12 @@ class Base128 : public Converter {
     /**
      * Enccode some given inBytes to outBytes.
      */
-    size_t encode(uint8_t* outBytes, size_t outSize, const uint8_t* inBytes, size_t inSize);
+    size_t encode(Stream& os, Stream& in);
 
     /**
      * Decode some given inBytes to outBytes.
      */
-    size_t decode(uint8_t* outBytes, size_t outSize, const uint8_t* inBytes, size_t inSize);
+    size_t decode(Stream& os, Stream& is);
 
     /**
      * Get the size of the encoded stream from given source

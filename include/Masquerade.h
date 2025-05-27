@@ -16,12 +16,12 @@ class Masquerade : public Converter {
     /**
      * Enccode some given inBytes to outBytes.
      */
-    size_t encode(uint8_t* outBytes, size_t outSize, const uint8_t* inBytes, size_t inSize);
+    virtual size_t encode(Stream& os, Stream& in) = 0;
 
     /**
      * Decode some given inBytes to outBytes.
      */
-    size_t decode(uint8_t* outBytes, size_t outSize, const uint8_t* inBytes, size_t inSize);
+    virtual size_t decode(Stream& os, Stream& is) = 0;
 
     /**
      * Get the size of the encoded stream from given source
