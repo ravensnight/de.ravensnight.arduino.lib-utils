@@ -10,10 +10,12 @@ class BufferOutputStream : public Stream {
     private:
 
         Buffer _buffer;
+        size_t _pos;
 
     public:
 
         BufferOutputStream(uint8_t* buffer, size_t len);
+        BufferOutputStream(Buffer& target);
 
         int write(uint16_t val);
         int write(uint32_t val);

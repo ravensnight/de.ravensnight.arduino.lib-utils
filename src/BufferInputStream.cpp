@@ -2,21 +2,28 @@
 
 BufferInputStream::BufferInputStream(const uint8_t* buffer, size_t len) {
     _buffer = Buffer((uint8_t*)buffer, len);
+    _pos = 0;
+}
+
+BufferInputStream::BufferInputStream(Buffer& buffer) {
+    _buffer = Buffer(buffer.bytes(), buffer.length());
+    _pos = 0;
 }
 
 int BufferInputStream::available() {
-    return _buffer.available();
+    return (_buffer.length() - _pos);
 }
 
 int BufferInputStream::read() {
-    int res = _buffer.get();
-    _buffer++;
-
+    int res = _buffer.get(_pos);
+    if (res >= 0) {
+        _pos++;
+    }
     return res;
 }
 
 int BufferInputStream::peek() {
-    return _buffer.get();
+    return _buffer.get(_pos);
 }
 
 size_t BufferInputStream::write(uint8_t w) {
@@ -24,13 +31,12 @@ size_t BufferInputStream::write(uint8_t w) {
 }
 
 int BufferInputStream::read(uint8_t& val) {
-    uint8_t temp[1] = {0};
-    int res = readBytes(temp, 1); 
-    if (res == 1) {
-        val = temp[0];
+    int res = read();
+    if (res >= 0) {
+        val = res;
+        return 1;
     }
-
-    return res;
+    return -1;
 }
 
 int BufferInputStream::read(uint16_t& val) {

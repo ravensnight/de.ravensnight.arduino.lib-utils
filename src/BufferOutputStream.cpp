@@ -2,10 +2,16 @@
 
 BufferOutputStream::BufferOutputStream(uint8_t* buffer, size_t len) {
     _buffer = Buffer(buffer, len);
+    _pos = 0;
+}
+
+BufferOutputStream::BufferOutputStream(Buffer& buffer) {
+    _buffer = Buffer(buffer.bytes(), buffer.length());
+    _pos = 0;
 }
 
 int BufferOutputStream::available() {
-    return _buffer.available();
+    return _buffer.length() - _pos;
 }
 
 int BufferOutputStream::read() {
@@ -21,23 +27,14 @@ int BufferOutputStream::availableForWrite() {
 }
 
 size_t BufferOutputStream::write(uint8_t w) {
-    _buffer.set(w);
-    _buffer++;
-
-    return _buffer.pos();
+    if (_buffer.set(_pos, w) > 0) {
+        return 1;
+    }
+    return 0;
 }
 
 size_t BufferOutputStream::writeBytes(const uint8_t* buffer, size_t size) {
-    size_t avl = (size_t)availableForWrite();
-    if (size > avl) {
-        return -1;
-    }
-
-    for (size_t i = 0; i < size; i++) {
-        write(buffer[i]);
-    }
-
-    return size;
+    return _buffer.set(_pos, buffer, size);
 }
 
 int BufferOutputStream::write(uint16_t val) {
