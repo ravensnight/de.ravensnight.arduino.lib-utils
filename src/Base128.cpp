@@ -12,15 +12,15 @@ size_t Base128::getDecodedSize(size_t encodedLen) {
     return res;
 }
 
-size_t Base128::decode(Stream& target, Stream& source) {
-    int outSize = getDecodedSize(source.available());
+size_t Base128::decode(Stream& target, Buffer& source) {
+    int outSize = getDecodedSize(source.length());
     if (outSize > target.availableForWrite()) return 0;
 
     uint8_t out = 0, in = 0, bit = 0;
     size_t count = 0;
 
-    while (source.available() > 0) {
-        source >> in;
+    for (size_t i = 0; i < source.length(); i++) {
+        in = source[i];
 
         for (int i = 0; i < 7; i++) {
             out <<= 1;
@@ -53,15 +53,15 @@ size_t Base128::getEncodedSize(size_t decodedLen) {
     return res;
 }
 
-size_t Base128::encode(Stream& target, Stream& source) {
-    int outSize = getDecodedSize(source.available());
+size_t Base128::encode(Stream& target, Buffer& source) {
+    int outSize = getDecodedSize(source.length());
     if (outSize > target.availableForWrite()) return 0;
 
     uint8_t out = 0, bit = 0, in = 0; 
     size_t count = 0;
 
-    while (source.available() > 0) {
-        source >> in;
+    for (size_t i = 0; i < source.length(); i++) {
+        in = source[i];
 
         //Logger::debug("encode - source: %x", in);
         for (int i = 0; i < 8; i++) {

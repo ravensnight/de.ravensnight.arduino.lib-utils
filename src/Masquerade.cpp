@@ -19,28 +19,12 @@ size_t Masquerade::getDecodedSize(size_t sourceLen) {
     return sourceLen;
 }
 
-size_t Masquerade::encode(Stream& out, Stream& in) {
-    size_t res = 0;
-    uint8_t val = 0;
-
-    while ((in.available() > 0) && (out.availableForWrite() > 0)) {
-        in >> val;
-        out << val;
-        res++;
-    }
-
-    return res;
+size_t Masquerade::encode(Stream& out, Buffer& in) {    
+    out << in;
+    return in.length();
 }
 
-size_t Masquerade::decode(Stream& out, Stream& in) {
-    size_t res = 0;
-    uint8_t val = 0;
-
-    while ((in.available() > 0) && (out.availableForWrite() > 0)) {
-        in >> val;
-        out << val;
-        res++;
-    }
-
-    return res;
+size_t Masquerade::decode(Stream& out, Buffer& in) {
+    out << in;
+    return in.length();
 }
