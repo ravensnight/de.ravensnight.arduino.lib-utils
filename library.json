@@ -1,6 +1,6 @@
 {
   "name": "ravensnight lib-utils",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Defines a some utilities being used in other libs",
   "keywords": "utils",
   "repository" : {
