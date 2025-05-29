@@ -22,7 +22,9 @@ class Buffer {
 
         void destroy();        
         size_t length() const;
+
         uint8_t* bytes();
+        uint8_t* bytesAt(size_t start);
 
         /**
          * Set a single byte to given position.

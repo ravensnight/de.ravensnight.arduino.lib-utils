@@ -103,10 +103,13 @@ size_t Buffer::set(size_t pos, uint8_t val) {
 }
 
 size_t Buffer::set(size_t pos, const uint8_t* source, size_t amount) {
-    size_t len = _length - pos;
+    size_t len = pos >= _length ? 0 : _length - pos;
     if (len > amount) len = amount;
 
-    memcpy((_buffer + pos), source, len);
+    if (len > 0) {
+        memcpy((_buffer + pos), source, len);
+    }
+
     return len;
 }
 
@@ -116,4 +119,12 @@ size_t Buffer::set(size_t pos, Buffer& buffer) {
 
 uint8_t* Buffer::bytes() {
     return _buffer;
+}
+
+uint8_t* Buffer::bytesAt(size_t pos) {
+    if (pos < _length) {
+        return (_buffer + pos);
+    }
+
+    return 0;
 }

@@ -6,7 +6,6 @@
 Stream& operator >>(Stream& is, uint8_t &val);
 Stream& operator >>(Stream& is, uint16_t &val);
 Stream& operator >>(Stream& is, uint32_t &val);
-
 Stream& operator <<(Stream& os, uint8_t val);
 Stream& operator <<(Stream& os, uint16_t val);
 Stream& operator <<(Stream& os, uint32_t val);
