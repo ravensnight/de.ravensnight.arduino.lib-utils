@@ -1,7 +1,7 @@
 #include <Stream.h>
 #include <Logger.h>
 
-using namespace LOGGING;
+using namespace ravensnight::logging;
 
 Stream& operator >>(Stream& is, uint8_t &val) {
     int i = is.read();

@@ -1,7 +1,9 @@
 #include <Buffer.h>
 #include <Logger.h>
 
-using namespace LOGGING;
+using namespace ravensnight::logging;
+
+namespace ravensnight::utils {
 
 Stream& operator <<(Stream& os, const Buffer& buffer) {
     int v = 0;
@@ -127,4 +129,6 @@ uint8_t* Buffer::bytesAt(size_t pos) {
     }
 
     return 0;
+}
+
 }

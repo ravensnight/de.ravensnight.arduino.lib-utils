@@ -3,6 +3,8 @@
 
 #include <Converter.h>
 
+namespace ravensnight::utils {
+
 class Masquerade : public Converter {
 
     private:
@@ -34,5 +36,6 @@ class Masquerade : public Converter {
     size_t getDecodedSize(size_t encodedLen);
 };
 
+}
 
 #endif // __BITMASK_H__

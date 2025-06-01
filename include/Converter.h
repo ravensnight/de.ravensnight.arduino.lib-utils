@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <Buffer.h>
 
+namespace ravensnight::utils {
 class Converter {
 
     public:
@@ -29,5 +30,7 @@ class Converter {
     virtual size_t getDecodedSize(size_t encodedLen) = 0;
         
 };
+
+}
 
 #endif

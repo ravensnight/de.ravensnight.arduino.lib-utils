@@ -1,7 +1,9 @@
 #include <Masquerade.h>
 #include <Logger.h>
 
-using namespace LOGGING;
+using namespace ravensnight::logging;
+
+namespace ravensnight::utils {
 
 Masquerade::Masquerade() {
     _mask = 0xFF;
@@ -27,4 +29,6 @@ size_t Masquerade::encode(Stream& out, Buffer& in) {
 size_t Masquerade::decode(Stream& out, Buffer& in) {
     out << in;
     return in.length();
+}
+
 }

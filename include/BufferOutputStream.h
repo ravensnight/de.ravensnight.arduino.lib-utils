@@ -5,6 +5,7 @@
 #include <Stream.h>
 #include <Buffer.h>
 
+namespace ravensnight::utils {
 class BufferOutputStream : public Stream {
 
     private:
@@ -29,5 +30,7 @@ class BufferOutputStream : public Stream {
         size_t write(uint8_t w);
         size_t writeBytes(const uint8_t* buffer, size_t len);
 };
+
+}
 
 #endif // __BufferOutputStream_H__

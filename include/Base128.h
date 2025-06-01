@@ -5,6 +5,7 @@
 #include <Converter.h>
 #include <Buffer.h>
 
+namespace ravensnight::utils {
 class Base128 : public Converter {
 
     public:
@@ -32,4 +33,5 @@ class Base128 : public Converter {
     size_t getDecodedSize(size_t encodedLen);
 };
 
+}
 #endif // __BASE128_H__

@@ -5,6 +5,8 @@
 #include <Stream.h>
 #include <Buffer.h>
 
+namespace ravensnight::utils {
+
 class BufferInputStream : public Stream {
 
     private:
@@ -27,5 +29,7 @@ class BufferInputStream : public Stream {
         
         size_t write(uint8_t w);
 };
+
+}
 
 #endif //  __BufferInputStream_H__

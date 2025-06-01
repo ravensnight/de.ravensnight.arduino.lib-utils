@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <StreamOperators.h>
 
+namespace ravensnight::utils {
 class Buffer {
 
     private:
@@ -67,5 +68,6 @@ class Buffer {
     
 };
 
+}
 
 #endif // __BUFFER_H__

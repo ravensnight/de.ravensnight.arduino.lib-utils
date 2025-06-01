@@ -1,7 +1,9 @@
 #include <Base128.h>
 #include <Logger.h>
 
-using namespace LOGGING;
+using namespace ravensnight::logging;
+namespace ravensnight::utils {
+
 
 Base128::Base128() {
     // do nothing
@@ -91,5 +93,7 @@ size_t Base128::encode(Stream& target, Buffer& source) {
     }
 
     return count;
+
+}
 
 }

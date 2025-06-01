@@ -1,5 +1,7 @@
 #include <BufferInputStream.h>
 
+namespace ravensnight::utils {
+
 BufferInputStream::BufferInputStream(const uint8_t* buffer, size_t len) {
     _buffer = Buffer((uint8_t*)buffer, len);
     _pos = 0;
@@ -65,4 +67,6 @@ int BufferInputStream::read(uint32_t& val) {
     }
 
     return res;
+}
+
 }

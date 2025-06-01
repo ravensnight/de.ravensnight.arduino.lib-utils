@@ -1,5 +1,7 @@
 #include <BufferOutputStream.h>
 
+namespace ravensnight::utils {
+
 BufferOutputStream::BufferOutputStream(uint8_t* buffer, size_t len) {
     _buffer = Buffer(buffer, len);
     _pos = 0;
@@ -61,3 +63,5 @@ int BufferOutputStream::write(uint32_t val) {
     return writeBytes(temp, 4);
 }
 
+
+}
