@@ -23,7 +23,10 @@ Stream& operator >>(Stream& is, uint16_t &val) {
 Stream& operator >>(Stream& is, uint32_t &val) {
     uint8_t buf[4];
     if (is.readBytes(buf, 4) == 4) {
-        val = (buf[3] << 24) | (buf[2] << 16) | (buf[1] << 8) | buf[0];
+        val = buf[3]; val <<= 8;
+        val |= buf[2]; val <<= 8;
+        val |= buf[1]; val <<= 8;
+        val |= buf[0];
     }
     return is;
 }

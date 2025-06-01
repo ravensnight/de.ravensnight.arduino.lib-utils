@@ -28,13 +28,17 @@ int BufferOutputStream::availableForWrite() {
 
 size_t BufferOutputStream::write(uint8_t w) {
     if (_buffer.set(_pos, w) > 0) {
+        _pos++;
         return 1;
     }
     return 0;
 }
 
 size_t BufferOutputStream::writeBytes(const uint8_t* buffer, size_t size) {
-    return _buffer.set(_pos, buffer, size);
+    size_t res = _buffer.set(_pos, buffer, size);
+    _pos += res;
+    
+    return res;
 }
 
 int BufferOutputStream::write(uint16_t val) {
