@@ -14,15 +14,18 @@ size_t Base128::getDecodedSize(size_t encodedLen) {
     return res;
 }
 
-size_t Base128::decode(Stream& target, Buffer& source) {
-    int outSize = getDecodedSize(source.length());
-    if (outSize > target.availableForWrite()) return 0;
+size_t Base128::decode(Stream& target, const uint8_t* buffer, size_t len) {
+    int outSize = getDecodedSize(len);
+    if (outSize > target.availableForWrite()) {
+        Logger::error("Decoded size does not match size of outstream: %d <> %d", outSize, target.availableForWrite());
+        return 0;
+    }
 
     uint8_t out = 0, in = 0, bit = 0;
     size_t count = 0;
 
-    for (size_t i = 0; i < source.length(); i++) {
-        in = source[i];
+    for (size_t i = 0; i < len; i++) {
+        in = buffer[i];
 
         for (int i = 0; i < 7; i++) {
             out <<= 1;
@@ -55,15 +58,15 @@ size_t Base128::getEncodedSize(size_t decodedLen) {
     return res;
 }
 
-size_t Base128::encode(Stream& target, Buffer& source) {
-    int outSize = getDecodedSize(source.length());
+size_t Base128::encode(Stream& target, const uint8_t* buffer, size_t len) {
+    int outSize = getDecodedSize(len);
     if (outSize > target.availableForWrite()) return 0;
 
     uint8_t out = 0, bit = 0, in = 0; 
     size_t count = 0;
 
-    for (size_t i = 0; i < source.length(); i++) {
-        in = source[i];
+    for (size_t i = 0; i < len; i++) {
+        in = buffer[i];
 
         //Logger::debug("encode - source: %x", in);
         for (int i = 0; i < 8; i++) {

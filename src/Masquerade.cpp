@@ -21,14 +21,16 @@ size_t Masquerade::getDecodedSize(size_t sourceLen) {
     return sourceLen;
 }
 
-size_t Masquerade::encode(Stream& out, Buffer& in) {    
+size_t Masquerade::encode(Stream& out, const uint8_t* buffer, size_t len) {    
+    Buffer in((uint8_t*)buffer, len);
     out << in;
-    return in.length();
+    return len;
 }
 
-size_t Masquerade::decode(Stream& out, Buffer& in) {
+size_t Masquerade::decode(Stream& out, const uint8_t* buffer, size_t len) {
+    Buffer in((uint8_t*)buffer, len);
     out << in;
-    return in.length();
+    return len;
 }
 
 }

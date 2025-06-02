@@ -12,12 +12,12 @@ class Converter {
     /**
      * Enccode some given inBytes to outBytes.
      */
-    virtual size_t encode(Stream& os, Buffer& in) = 0;
+    virtual size_t encode(Stream& os, const uint8_t* buffer, size_t len) = 0;
 
     /**
      * Decode some given inBytes to outBytes.
      */
-    virtual size_t decode(Stream& os, Buffer& is) = 0;
+    virtual size_t decode(Stream& os, const uint8_t* buffer, size_t len) = 0;
 
     /**
      * Get the size of the encoded stream from given source

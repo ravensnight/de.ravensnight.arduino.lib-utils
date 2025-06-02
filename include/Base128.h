@@ -15,12 +15,12 @@ class Base128 : public Converter {
     /**
      * Enccode some given inBytes to outBytes.
      */
-    size_t encode(Stream& os, Buffer& in);
+    size_t encode(Stream& os, const uint8_t* buffer, size_t len);
 
     /**
      * Decode some given inBytes to outBytes.
      */
-    size_t decode(Stream& os, Buffer& is);
+    size_t decode(Stream& os, const uint8_t* buffer, size_t len);
 
     /**
      * Get the size of the encoded stream from given source
