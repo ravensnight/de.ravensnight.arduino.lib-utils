@@ -11,17 +11,14 @@ class BufferInputStream : public Stream {
 
     private:
 
-        Buffer _buffer;
+        const uint8_t* _buffer;
+        size_t _size;
         size_t _pos;
 
     public:
 
         BufferInputStream(const uint8_t* buffer, size_t len);
         BufferInputStream(Buffer& source);
-
-        int read(uint8_t& val);
-        int read(uint16_t& val);
-        int read(uint32_t& val);
 
         int available();
         int peek();

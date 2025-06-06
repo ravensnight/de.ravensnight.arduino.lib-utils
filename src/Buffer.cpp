@@ -6,57 +6,48 @@ using namespace ravensnight::logging;
 namespace ravensnight::utils {
 
 Stream& operator <<(Stream& os, const Buffer& buffer) {
-    int v = 0;
-    for (size_t i = 0; i < buffer.length(); i++) {
-        v = buffer.get(i);
-        if (v < 0) break;
 
-        os << (uint8_t)v;
+    uint8_t* arr = buffer.bytes();
+    Logger::debug("Write buffer to output stream. Len: %d", buffer.length());
+    for (size_t i = 0; i < buffer.length(); i++) {
+        os << arr[i];
     }
 
     return os;
 };
 
 Stream& operator >>(Stream& is, Buffer& buffer) {
-
     int v = 0;
-    for (size_t i = 0; i < buffer.length(); i++) {        
+    while (buffer.avail()) {
         v = is.read();
         if (v < 0) break;
 
-        if (buffer.set(i, (uint8_t)v) < 1) {
-            break;
-        }
+        buffer.append((uint8_t)v);
     }
-
-    return is;    
-}
-
-uint8_t& Buffer::operator[] (size_t pos) {
-    if (pos < _length) {
-        return _buffer[pos];
-    } else {
-        Logger::error("Read from invalid index %d (max=%d)!", pos, _length);
-        _nil = 0;
-        return _nil;
-    }    
+    return is;
 }
 
 Buffer::Buffer() {
-    _length = 0;
+    _start = 0;
+    _size = 0;
     _buffer = 0;
+    _idx = 0;    
     _mine = false;
 }
 
-Buffer::Buffer(uint8_t* buffer, size_t len) {
-    _length = len;
+Buffer::Buffer(uint8_t* buffer, size_t start, size_t len) {
+    _start = start;
+    _size = len;
+    _idx = 0;
     _buffer = buffer;
     _mine = false;
 }
 
 Buffer::Buffer(size_t len) {
     this->_buffer = (uint8_t*)malloc(len);
-    this->_length = len;
+    this->_idx = 0;
+    this->_start =0;
+    this->_size = len;
     this->_mine = true;
 }
 
@@ -66,69 +57,94 @@ Buffer::~Buffer() {
 
 void Buffer::destroy() {
     if ((_mine) && (_buffer != 0)) {
+        // Logger::debug("destroy buffer.");
         free(_buffer);
         _buffer = 0;
-        _length = 0;
+        _start = 0;
+        _size = 0;
+        _idx = 0;
+        _mine = false;
     }
+}
+
+void Buffer::reset() {
+    _idx = _start;
+}
+
+size_t Buffer::capacity() const {
+    return _size;
+}
+
+size_t Buffer::avail() const {
+    size_t res = _size - _idx;
+    // Logger::debug("Available for writing to buffer: %d", res);
+    return res;
 }
 
 size_t Buffer::length() const {
-    return _length;
+    return _idx;
 }
 
-int Buffer::get(size_t pos) const {
-    if (pos < _length) {
-        return _buffer[pos];
-    }    
-
-    return -1;
-}
-
-size_t Buffer::get(size_t pos, uint8_t* target, size_t amount) const {
-    size_t len = _length - pos;
-    if (len > amount) len = amount;
-
-    memcpy(target, (_buffer + pos), len);
-    return len;
-}
-
-size_t Buffer::get(size_t pos, Buffer& buffer) const {
-    return get(pos, buffer.bytes(), buffer.length());
-}
-
-size_t Buffer::set(size_t pos, uint8_t val) {
-    if (pos < _length) {
-        _buffer[pos] = val;
-        return 1;
+size_t Buffer::moveTo(size_t idx) {
+    if (idx < _size) {
+        _idx = idx;
+    } else {
+        _idx = _size;
     }
-    return 0;
+
+    return _idx;
 }
 
-size_t Buffer::set(size_t pos, const uint8_t* source, size_t amount) {
-    size_t len = pos >= _length ? 0 : _length - pos;
+size_t Buffer::append(uint8_t val) {
+    if (avail() < 1) return 0;
+
+    StreamHelper::write8(bytesAt(_idx), val);
+    _idx++;
+
+    //Logger::dump("Buffer::append", bytes(), _idx, 0);
+    return _idx;
+}
+
+size_t Buffer::append(uint16_t val) {
+    if (avail() < 2) return 0;
+
+    StreamHelper::write16(bytesAt(_idx), val);
+    _idx += 2;
+
+    //Logger::dump("Buffer::append", bytes(), _idx, 0);
+    return _idx;
+}
+
+size_t Buffer::append(uint32_t val) {
+    if (avail() < 4) return 0;
+
+    StreamHelper::write32(bytesAt(_idx), val);
+    _idx += 4;
+
+    //Logger::dump("Buffer::append", bytes(), _idx, 0);
+    return _idx;
+}
+
+size_t Buffer::append(const uint8_t* source, size_t amount) {
+
+    size_t len = avail();
     if (len > amount) len = amount;
 
     if (len > 0) {
-        memcpy((_buffer + pos), source, len);
+        memcpy(bytesAt(_idx), source, len);
+        _idx += len;
     }
 
-    return len;
+    //Logger::dump("Buffer::append", bytes(), _idx, 0);
+    return _idx;
 }
 
-size_t Buffer::set(size_t pos, Buffer& buffer) {
-    return set(pos, buffer.bytes(), buffer.length());
+uint8_t* Buffer::bytes() const {
+    return (_buffer + _start);
 }
 
-uint8_t* Buffer::bytes() {
-    return _buffer;
-}
-
-uint8_t* Buffer::bytesAt(size_t pos) {
-    if (pos < _length) {
-        return (_buffer + pos);
-    }
-
-    return 0;
+uint8_t* Buffer::bytesAt(size_t pos) const {
+    return (_buffer + (_start + pos));
 }
 
 }

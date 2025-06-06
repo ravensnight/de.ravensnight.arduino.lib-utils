@@ -2,18 +2,18 @@
 
 namespace ravensnight::utils {
 
-BufferOutputStream::BufferOutputStream(uint8_t* buffer, size_t len) {
-    _buffer = Buffer(buffer, len);
-    _pos = 0;
+BufferOutputStream::BufferOutputStream(size_t capacity) : _buffer(capacity) {
 }
 
-BufferOutputStream::BufferOutputStream(Buffer& buffer) {
-    _buffer = Buffer(buffer.bytes(), buffer.length());
-    _pos = 0;
+BufferOutputStream::BufferOutputStream(uint8_t* buffer, size_t len) : _buffer(buffer, 0, len) {
+}
+
+BufferOutputStream::~BufferOutputStream() {
+    _buffer.destroy();
 }
 
 int BufferOutputStream::available() {
-    return _buffer.length() - _pos;
+    return 0;
 }
 
 int BufferOutputStream::read() {
@@ -25,43 +25,19 @@ int BufferOutputStream::peek() {
 }
 
 int BufferOutputStream::availableForWrite() {
-    return available();
+    return _buffer.avail();
 }
 
 size_t BufferOutputStream::write(uint8_t w) {
-    if (_buffer.set(_pos, w) > 0) {
-        _pos++;
-        return 1;
-    }
-    return 0;
+    return _buffer.append(w);
 }
 
 size_t BufferOutputStream::writeBytes(const uint8_t* buffer, size_t size) {
-    size_t res = _buffer.set(_pos, buffer, size);
-    _pos += res;
-    
-    return res;
+    return _buffer.append(buffer, size);
 }
 
-int BufferOutputStream::write(uint16_t val) {
-    uint8_t temp[] { 
-        (uint8_t)((val >> 8) & 0xFF), 
-        (uint8_t)(val & 0xFF)
-    };
-
-    return writeBytes(temp, 2);
+Buffer& BufferOutputStream::buffer() {
+    return _buffer;
 }
-
-int BufferOutputStream::write(uint32_t val) {
-    uint8_t temp[] { 
-        (uint8_t)((val >> 24) & 0xFF), 
-        (uint8_t)((val >> 16) & 0xFF), 
-        (uint8_t)((val >> 8) & 0xFF), 
-        (uint8_t)(val & 0xFF)
-    };
-
-    return writeBytes(temp, 4);
-}
-
 
 }

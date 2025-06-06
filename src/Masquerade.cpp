@@ -22,15 +22,17 @@ size_t Masquerade::getDecodedSize(size_t sourceLen) {
 }
 
 size_t Masquerade::encode(Stream& out, const uint8_t* buffer, size_t len) {    
-    Buffer in((uint8_t*)buffer, len);
-    out << in;
-    return len;
+    size_t size = out.availableForWrite();
+    if (size > len) size = len;
+
+    for (size_t i = 0; i < size; i++) {
+        out.write(buffer[i]);
+    }    
+    return size;
 }
 
 size_t Masquerade::decode(Stream& out, const uint8_t* buffer, size_t len) {
-    Buffer in((uint8_t*)buffer, len);
-    out << in;
-    return len;
+    return encode(out, buffer, len);
 }
 
 }

@@ -11,21 +11,20 @@ class BufferOutputStream : public Stream {
     private:
 
         Buffer _buffer;
-        size_t _pos;
 
     public:
 
+        BufferOutputStream(size_t capacity);
         BufferOutputStream(uint8_t* buffer, size_t len);
-        BufferOutputStream(Buffer& target);
-
-        int write(uint16_t val);
-        int write(uint32_t val);
+        ~BufferOutputStream();
 
         int available();
         int peek();
         int read();
         
         int availableForWrite();
+
+        Buffer& buffer();
 
         size_t write(uint8_t w);
         size_t writeBytes(const uint8_t* buffer, size_t len);
