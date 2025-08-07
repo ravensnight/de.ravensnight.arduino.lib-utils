@@ -5,6 +5,15 @@
 using namespace ravensnight::logging;
 using namespace ravensnight::utils;
 
+Stream& operator >>(Stream& is, bool &val) {    
+    int i = is.read();
+    if (i > -1) {
+        val = ((i & 0xFF) > 0);
+    }
+
+    return is;
+}
+
 Stream& operator >>(Stream& is, uint8_t &val) {    
     int i = is.read();
     if (i > -1) {
@@ -37,6 +46,11 @@ Stream& operator >>(Stream& is, uint64_t &val) {
     }
 
     return is;
+}
+
+Stream& operator <<(Stream& os, bool val) {
+    os.write(val);
+    return os;
 }
 
 Stream& operator <<(Stream& os, uint8_t val) {
