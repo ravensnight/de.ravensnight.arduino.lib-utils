@@ -1,6 +1,7 @@
-#include <StreamHelper.h>
+#include <utils/StreamHelper.h>
+#include <utils/LoggerConfig.h>
+
 #include <Stream.h>
-#include <Logger.h>
 
 using namespace ravensnight::logging;
 using namespace ravensnight::utils;
@@ -122,14 +123,14 @@ void StreamHelper::read64(const uint8_t* buffer, uint64_t& val) {
 void StreamHelper::write8(uint8_t* buffer, uint8_t val) {
     buffer[0] = val & 0xFF;
 
-    //Logger::dump("StreamHelper::write32 - wrote", buffer, 1, 0);
+    _logger.dump("StreamHelper::write32 - wrote", buffer, 1, 0);
 }
 
 void StreamHelper::write16(uint8_t* buffer, uint16_t val) {
     buffer[0] = val & 0xFF;
     buffer[1] = (val >> 8) & 0xFF;
 
-    //Logger::dump("StreamHelper::write32 - wrote", buffer, 2, 0);
+    _logger.dump("StreamHelper::write32 - wrote", buffer, 2, 0);
 }
 
 void StreamHelper::write32(uint8_t* buffer, uint32_t val) {
@@ -138,7 +139,7 @@ void StreamHelper::write32(uint8_t* buffer, uint32_t val) {
     buffer[2] = (val >> 16) & 0xFF;
     buffer[3] = (val >> 24) & 0xFF;
 
-    //Logger::dump("StreamHelper::write32 - wrote", buffer, 4, 0);
+    _logger.dump("StreamHelper::write32 - wrote", buffer, 4, 0);
 }
 
 void StreamHelper::write64(uint8_t* buffer, uint64_t src) {
@@ -148,7 +149,9 @@ void StreamHelper::write64(uint8_t* buffer, uint64_t src) {
         val >>= 8;
     }
 
-    //Logger::dump("StreamHelper::write64 - wrote", buffer, 4, 0);
+    _logger.dump("StreamHelper::write64 - wrote", buffer, 4, 0);
 }
+
+ClassLogger StreamHelper::_logger(LC_UTILS);
 
 }

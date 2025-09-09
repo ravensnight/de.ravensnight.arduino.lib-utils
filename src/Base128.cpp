@@ -1,5 +1,5 @@
-#include <Base128.h>
-#include <Logger.h>
+#include <utils/LoggerConfig.h>
+#include <utils/Base128.h>
 
 using namespace ravensnight::logging;
 namespace ravensnight::utils {
@@ -17,7 +17,7 @@ size_t Base128::getDecodedSize(size_t encodedLen) {
 size_t Base128::decode(Stream& target, const uint8_t* buffer, size_t len) {
     int outSize = getDecodedSize(len);
     if (outSize > target.availableForWrite()) {
-        Logger::error("Decoded size does not match size of outstream: %d <> %d", outSize, target.availableForWrite());
+        _logger.error("Decoded size does not match size of outstream: %d <> %d", outSize, target.availableForWrite());
         return 0;
     }
 
@@ -37,7 +37,7 @@ size_t Base128::decode(Stream& target, const uint8_t* buffer, size_t len) {
 
             bit++;
             if (bit == 8) {
-                //Logger::debug("decode - write out: %x", out);
+                _logger.trace("decode - write out: %x", out);
                 target << out;
                 bit = 0;
                 out = 0;        
@@ -68,7 +68,7 @@ size_t Base128::encode(Stream& target, const uint8_t* buffer, size_t len) {
     for (size_t i = 0; i < len; i++) {
         in = buffer[i];
 
-        //Logger::debug("encode - source: %x", in);
+        _logger.trace("encode - source: %x", in);
         for (int i = 0; i < 8; i++) {
             out <<= 1;
             int match = (1 << (7 - i));
@@ -78,7 +78,7 @@ size_t Base128::encode(Stream& target, const uint8_t* buffer, size_t len) {
 
             bit++;
             if (bit == 7) {
-                //Logger::debug("encode - write out: %x", out);
+                _logger.trace("encode - write out: %x", out);
                 target << out;
                 count++;
 
@@ -90,13 +90,14 @@ size_t Base128::encode(Stream& target, const uint8_t* buffer, size_t len) {
 
     if (bit > 0) {
         out <<= (7 - bit);
-        //Logger::debug("encode - write out: %x", out);
+        _logger.trace("encode - write out: %x", out);
         target << out;
         count++;
     }
 
-    return count;
-
+    return count;    
 }
+
+ClassLogger Base128::_logger(LC_UTILS);
 
 }

@@ -1,4 +1,4 @@
-#include <Masquerade.h>
+#include <utils/Masquerade.h>
 #include <Logger.h>
 
 using namespace ravensnight::logging;
