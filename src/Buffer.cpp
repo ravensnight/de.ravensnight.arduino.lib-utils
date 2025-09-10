@@ -9,7 +9,7 @@ namespace ravensnight::utils
     Stream &operator<<(Stream &os, const Buffer &buffer)
     {
         uint8_t *arr = buffer.bytes();
-        Logger::trace("Write buffer to output stream. Len: %d", buffer.length());
+        Buffer::_logger.trace("Write buffer to output stream. Len: %d", buffer.length());
 
         for (size_t i = 0; i < buffer.length(); i++)
         {
