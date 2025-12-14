@@ -64,6 +64,15 @@ namespace ravensnight::utils {
                 _ptr = ptr;
                 _owned = true;
             }
+
+            Ref<T>& operator =(T* ptr) {
+                aggregate(ptr);
+                return *this;
+            }
+
+            T& operator *() {
+                return *_ptr;
+            }
     };
 }
 

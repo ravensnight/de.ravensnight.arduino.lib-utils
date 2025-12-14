@@ -11,15 +11,18 @@ Buffer b((uint8_t*)text, 0, strlen(text));
 
 uint8_t len = 0, i = 0;
 
+Ref<Buffer> ref;
+
 void setup() {
     len = strlen(text);
     i = 0;
+    ref = &b;
 }
 
 void loop() {
     if (i >= len) i = 0;
 
-    uint8_t elem = b.bytes()[i];
+    uint8_t elem = (*ref).bytes()[i];
     Logger::debug("Char at pos %d is %d", i, elem);
 
     i++;
