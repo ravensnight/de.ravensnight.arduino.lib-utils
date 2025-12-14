@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <ClassLogger.h>
 #include <utils/StreamHelper.h>
+#include <utils/Ref.hpp>
 
 using namespace ravensnight::logging;
 
@@ -12,11 +13,10 @@ class Buffer {
 
     private:
 
-        uint8_t* _buffer;       // the buffer itself
-        size_t   _start;        // start inside the buffer
-        size_t   _size;         // the size if the buffer
-        size_t   _idx;          // current position
-        bool     _mine;         // the buffer is my own buffer. I will delete it.
+        Ref<uint8_t> _buffer;       // the buffer itself
+        size_t       _start;        // start inside the buffer
+        size_t       _size;         // the size if the buffer
+        size_t       _idx;          // current position
 
     protected:
         static ClassLogger _logger;

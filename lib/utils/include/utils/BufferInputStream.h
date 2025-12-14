@@ -11,7 +11,7 @@ class BufferInputStream : public Stream {
 
     private:
 
-        const uint8_t* _buffer;
+        Ref<uint8_t> _buffer;
         size_t _size;
         size_t _pos;
 
