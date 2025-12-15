@@ -71,7 +71,7 @@ namespace ravensnight::utils {
             /**
              * Check if pointer is NULL
              */
-            bool isNULL() {
+            bool isNULL() const {
                 return _ptr == 0;
             }
 
@@ -105,7 +105,7 @@ namespace ravensnight::utils {
                 return *this;
             }
 
-            T& operator *() {
+            T& operator *() const {
                 assert(_ptr != 0);
                 return *_ptr;
             }
