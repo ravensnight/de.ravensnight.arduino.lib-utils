@@ -2,13 +2,14 @@
 
 namespace ravensnight::utils {
 
-BufferInputStream::BufferInputStream(const uint8_t* buffer, size_t len) {
-    _buffer.attach((uint8_t*)buffer);
+BufferInputStream::BufferInputStream(const uint8_t* buffer, size_t len) : 
+    _buffer((uint8_t*)buffer, RefType::weak) 
+{
     _size = len;
     _pos = 0;
 }
 
-BufferInputStream::BufferInputStream(Buffer& buffer) {
+BufferInputStream::BufferInputStream(Buffer& buffer) : _buffer(RefType::weak) {
     _buffer = buffer.bytes();
     _size = buffer.length();
     _pos = 0;

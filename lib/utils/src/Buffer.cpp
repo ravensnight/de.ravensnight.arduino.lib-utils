@@ -33,24 +33,23 @@ namespace ravensnight::utils
         return is;
     }
 
-    Buffer::Buffer() {
+    Buffer::Buffer() : _buffer(RefType::owned) {
         _start = 0;
         _size = 0;
         _buffer = 0;
         _idx = 0;
     }
 
-    Buffer::Buffer(uint8_t *buffer, size_t start, size_t len)
+    Buffer::Buffer(uint8_t *buffer, size_t start, size_t len) : _buffer(buffer, RefType::weak)
     {
         _start = start;
         _size = len;
         _idx = 0;
-        _buffer.attach(buffer);
     }
 
-    Buffer::Buffer(size_t len)
+    Buffer::Buffer(size_t len) : _buffer(RefType::owned)
     {
-        this->_buffer.aggregate((uint8_t *)malloc(len));
+        this->_buffer = (uint8_t *)malloc(len);
         this->_idx = 0;
         this->_start = 0;
         this->_size = len;

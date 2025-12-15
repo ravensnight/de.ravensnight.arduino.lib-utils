@@ -11,7 +11,7 @@ Buffer b((uint8_t*)text, 0, strlen(text));
 
 uint8_t len = 0, i = 0;
 
-Ref<Buffer> ref;
+Ref<Buffer> ref(RefType::weak);
 
 void setup() {
     len = strlen(text);
@@ -23,6 +23,9 @@ void loop() {
     if (i >= len) i = 0;
 
     uint8_t elem = (*ref).bytes()[i];
+    Logger::debug("Char at pos %d is %d", i, elem);
+
+    elem = ref[i];
     Logger::debug("Char at pos %d is %d", i, elem);
 
     i++;
