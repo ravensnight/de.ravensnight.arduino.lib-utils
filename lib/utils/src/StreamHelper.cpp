@@ -6,6 +6,8 @@
 using namespace ravensnight::logging;
 using namespace ravensnight::utils;
 
+Logger StreamHelper::_logger(LC_UTILS);
+
 Stream& operator >>(Stream& is, bool &val) {    
     int i = is.read();
     if (i > -1) {
@@ -152,6 +154,5 @@ void StreamHelper::write64(uint8_t* buffer, uint64_t src) {
     _logger.dump("StreamHelper::write64 - wrote", buffer, 4, 0);
 }
 
-ClassLogger StreamHelper::_logger(LC_UTILS);
 
 }

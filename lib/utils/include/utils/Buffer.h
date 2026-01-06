@@ -2,7 +2,7 @@
 #define __BUFFER_H__
 
 #include <Arduino.h>
-#include <ClassLogger.h>
+#include <Logger.h>
 #include <utils/StreamHelper.h>
 #include <utils/Ref.hpp>
 
@@ -19,7 +19,7 @@ class Buffer {
         size_t       _idx;          // current position
 
     protected:
-        static ClassLogger _logger;
+        static Logger _logger;
 
     public:
 

@@ -5,6 +5,7 @@ using namespace ravensnight::logging;
 
 namespace ravensnight::utils
 {
+    Logger Buffer::_logger(LC_UTILS);
 
     Stream &operator<<(Stream &os, const Buffer &buffer)
     {
@@ -169,7 +170,5 @@ namespace ravensnight::utils
         uint8_t* ptr = _buffer.get();
         return (ptr + (_start + pos));
     }
-
-    ClassLogger Buffer::_logger(LC_UTILS);
 
 }

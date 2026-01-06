@@ -2,7 +2,7 @@
 #define __BASE128_H__
 
 #include <Arduino.h>
-#include <ClassLogger.h>
+#include <Logger.h>
 #include <utils/Converter.h>
 #include <utils/Buffer.h>
 
@@ -13,7 +13,7 @@ class Base128 : public Converter {
 
     private:
 
-        static ClassLogger _logger;
+        static Logger _logger;
 
     public:
 

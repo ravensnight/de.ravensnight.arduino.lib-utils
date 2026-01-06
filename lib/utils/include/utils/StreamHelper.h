@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 #include <Stream.h>
-#include <ClassLogger.h>
+#include <Logger.h>
 
 using namespace ravensnight::logging;
 
@@ -12,7 +12,7 @@ namespace ravensnight::utils {
     class StreamHelper {
 
         private:
-            static ClassLogger _logger;
+            static Logger _logger;
 
         public:
 

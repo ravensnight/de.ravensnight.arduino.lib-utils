@@ -4,6 +4,7 @@
 using namespace ravensnight::logging;
 namespace ravensnight::utils {
 
+Logger Base128::_logger(LC_UTILS);
 
 Base128::Base128() {
     // do nothing
@@ -98,6 +99,5 @@ size_t Base128::encode(Stream& target, const uint8_t* buffer, size_t len) {
     return count;    
 }
 
-ClassLogger Base128::_logger(LC_UTILS);
 
 }

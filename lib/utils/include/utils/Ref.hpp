@@ -116,6 +116,11 @@ namespace ravensnight::utils {
 
                 return p[pos];
             }
+
+            T* operator ->() {
+                assert(_ptr != 0);
+                return _ptr;
+            }
     };
 }
 
