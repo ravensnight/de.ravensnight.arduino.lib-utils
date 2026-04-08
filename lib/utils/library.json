@@ -18,7 +18,7 @@
   "dependencies": [
     {
       "name": "ravensnight lib-logging",
-      "version": "https://github.com/ravensnight/de.ravensnight.arduino.lib-logging.git#1.6.1"
+      "version": "https://github.com/ravensnight/de.ravensnight.arduino.lib-logging.git#lib-logging-v1.7.0"
     }
   ],
   "frameworks": "arduino",
