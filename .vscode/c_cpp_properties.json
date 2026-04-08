@@ -8,11 +8,11 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/src",
-                "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/include",
-                "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/src",
-                "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/include",
-                "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/src",
+                "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/src",
+                "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/include",
+                "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/src",
+                "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/include",
+                "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/src",
                 "/home/waldwuffel/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/newlib/platform_include",
                 "/home/waldwuffel/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/freertos/include",
                 "/home/waldwuffel/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/freertos/include/esp_additions/freertos",
@@ -250,11 +250,11 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/src",
-                    "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/include",
-                    "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/src",
-                    "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/include",
-                    "/mnt/data/prj/synthhead/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/src",
+                    "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/src",
+                    "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/include",
+                    "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/lib/utils/src",
+                    "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/include",
+                    "/mnt/synthhead/dev/mc1210f/software/de.ravensnight.arduino.lib-utils/.pio/libdeps/lib-utils-esp32/ravensnight lib-logging/src",
                     "/home/waldwuffel/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/newlib/platform_include",
                     "/home/waldwuffel/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/freertos/include",
                     "/home/waldwuffel/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32s3/include/freertos/include/esp_additions/freertos",
@@ -491,7 +491,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60118",
+                "PLATFORMIO=60119",
                 "ARDUINO_ESP32_S3_USB_OTG",
                 "ARDUINO_RUNNING_CORE=1",
                 "ARDUINO_EVENT_RUNNING_CORE=1",
